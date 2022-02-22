@@ -1,16 +1,29 @@
 <template>
-<h1>欢迎来到登录界面</h1>
-<Welcome msg="jack"></Welcome>
-<el-button @click="goHome">回首页</el-button>
+  <h1>欢迎来到登录界面</h1>
+  <el-button @click="goHome">回首页</el-button>
 </template>
 
 <script>
 import Welcome from './Welcome.vue'
 export default {
-  name:'login',
-  components:{Welcome},
-  methods:{
-    goHome(){
+  name: 'login',
+  components: { Welcome },
+  mounted() {
+    /*  this.$request({
+       method: 'get',
+       url: '/login',
+       data: {
+         name: 'jack'
+       }
+     }).then((res) => {
+       console.log(res)
+     }) */
+    this.$request.get('/login', { name: 'qiyu' }, { mock: true, loading: true }).then((res) => {
+      console.log(res)
+    })
+  },
+  methods: {
+    goHome() {
       this.$router.push('/welcome')
     }
   }
@@ -19,5 +32,4 @@ export default {
 </script>
 
 <style>
-
 </style>
