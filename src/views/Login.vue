@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <div class="modal">
       <el-form ref="userForm" :model="user" status-icon :rules="rules">
-        <div class="title">超人</div>
+        <div class="title">黄金梅丽号</div>
         <el-form-item prop="userName">
           <el-input type="text" prefix-icon="el-icon-user" v-model="user.userName" />
         </el-form-item>
