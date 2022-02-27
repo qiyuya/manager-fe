@@ -24,7 +24,9 @@
           <div class="menu-fold" @click="toggle">
             <i class="el-icon-s-fold"></i>
           </div>
-          <div class="bread">面包屑</div>
+          <div class="bread">
+            <BreadCrumb />
+          </div>
         </div>
         <div class="user-info">
           <el-badge :is-dot="noticeCount > 0 ? true : false" class="notice" type="danger">
@@ -44,9 +46,7 @@
         </div>
       </div>
       <div class="wrapper">
-        <div class="main-page">
-          <router-view></router-view>
-        </div>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -54,9 +54,10 @@
 
 <script>
 import TreeMenu from "./TreeMenu.vue"
+import BreadCrumb from "./BreadCrumb.vue"
 export default {
   name: 'Home',
-  components: { TreeMenu },
+  components: { TreeMenu, BreadCrumb },
   data() {
     return {
       isCollapse: false,

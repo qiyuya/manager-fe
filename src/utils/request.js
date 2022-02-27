@@ -3,6 +3,8 @@ import axios from 'axios'
 import config from './../config'
 import { ElMessage } from 'element-plus'
 import router from './../router'
+import storage from './storage'
+
 const TOKEN_INVALID = 'Token认证失败,请重新登录'
 const NETWORK_ERROR = '网络请求异常,请稍后重试'
 
@@ -16,7 +18,8 @@ const service = axios.create({
 service.interceptors.request.use((req) => {
   // T0-D0
   const headers = req.headers
-  if(!headers.Authorization) headers.Authorization = 'Bear Jack'
+  const { token } = storage.getItem('userInfo')
+  if (!headers.Authorization) headers.Authorization = 'Bearer ' + token
   return req
 })
 
@@ -38,21 +41,22 @@ service.interceptors.response.use((res) => {
 })
 /* 
   请求核心函数
-  @param {*} options 请求配置
+  请求配置
  */
 function request(options) {
-  options.method = options.method || 'get'
-  if (options.method.toLowerCase() === 'get') {
-    options.params = options.data
-  }
-  if (typeof options.mock != 'undefined') {
-    config.mock = options.mock
-  }
-  if (config.env === 'prod') {
-    service.defaults.baseURL = config.baseApi
-  } else {
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi
-  }
+  options.method = options.method || 'get'
+  if (options.method.toLowerCase() === 'get') {
+      options.params = options.data;
+  }
+  let isMock = config.mock;
+  if (typeof options.mock != 'undefined') {
+      isMock = options.mock;
+  }
+  if (config.env === 'prod') {
+      service.defaults.baseURL = config.baseApi
+  } else {
+      service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
+  }
 
  return service(options)
 }
