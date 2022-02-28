@@ -32,7 +32,7 @@ export default {
       url: '/users/list',
       method:'get',
       data: params,
-      mock:true
+      mock:false
     })
   },
     userDel(params) {
@@ -40,7 +40,7 @@ export default {
       url: '/users/delete',
       method:'post',
       data: params,
-      mock:true
+      mock:false
     })
   },
     getRoleList() {
@@ -57,6 +57,14 @@ export default {
       method: 'get',
       data: {},
       mock: true
+    })
+  },
+  userSubmit(params) {
+     return request({
+      url: '/users/operate',
+      method: 'post',
+      data: params,
+      mock: false
     })
   }
 }
