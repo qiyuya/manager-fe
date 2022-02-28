@@ -39,7 +39,7 @@
         ></el-table-column>
         <el-table-column label="操作" width="150">
           <template #default="scope">
-            <el-button @click="handleClick(scope.row)" size="mini">编辑</el-button>
+            <el-button @click="handleEdit(scope.row)" size="mini">编辑</el-button>
             <el-button type="danger" size="mini" @click="handleDel(scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -54,12 +54,12 @@
       ></el-pagination>
     </div>
     <el-dialog title="用户新增" v-model="showModal">
-      <el-form ref="dialogFrom" :model="userForm" label-width="100px" :rules="rules">
+      <el-form ref="dialogForm" :model="userForm" label-width="100px" :rules="rules">
         <el-form-item label="用户名" prop="userName">
-          <el-input v-model="userForm.userName" placeholder="请输入用户名称" />
+          <el-input v-model="userForm.userName" :disabled="action == 'edit'" placeholder="请输入用户名称" />
         </el-form-item>
         <el-form-item label="邮箱" prop="userEmail">
-          <el-input v-model="userForm.userEmail" placeholder="请输入用户邮箱">
+          <el-input v-model="userForm.userEmail" :disabled="action == 'edit'" placeholder="请输入用户邮箱">
             <template #append>@qiyuya.com</template>
           </el-input>
         </el-form-item>
@@ -112,12 +112,14 @@
   </div>
 </template>
 <script>
-import { getCurrentInstance, onMounted, reactive, ref } from 'vue'
+import { getCurrentInstance, onMounted, reactive, ref, toRaw } from 'vue'
+import utils from '../utils/utils'
 import api from '../api'
 export default {
   name: 'user',
   setup() {
-    const { ctx } = getCurrentInstance()
+    // 获取Composition API 上下文对象
+    const { ctx, proxy } = getCurrentInstance()
     // 获取this
     const instance = getCurrentInstance()
     const _this = instance.appContext.config.globalProperties
@@ -144,6 +146,8 @@ export default {
     const roleList = ref([])
     // 所有部门列表
     const deptList = ref([])
+    // 定义用户操作行为
+    const action = ref('add')
     // 定义表单校验规则
     const rules = reactive({
       userName: [
@@ -213,11 +217,19 @@ export default {
       },
       {
         label: '注册时间',
-        prop: 'createTime'
+        prop: 'createTime',
+        width: 180,
+        formatter: (row, column, value) => {
+          return utils.formateDate(new Date(value))
+        }
       },
       {
         label: '最后登录时间',
-        prop: 'lastLoginTime'
+        prop: 'lastLoginTime',
+        width: 180,
+        formatter: (row, column, value) => {
+          return utils.formateDate(new Date(value))
+        }
       },
     ])
     // 初始化接口调用
@@ -242,6 +254,7 @@ export default {
     // 重置查询表单
     const handleReset = (form) => {
       ctx.$refs[form].resetFields()
+      handleQuery()
     }
     // 分页事件处理
     const handleCurrentChange = (current) => {
@@ -258,7 +271,6 @@ export default {
     }
     // 批量删除
     const handlePatchDel = async () => {
-      console.log(checkedUserIds.value.length)
       if (checkedUserIds.value.length == 0) {
         _this.$message.error('请选择要删除的用户')
         return
@@ -266,7 +278,7 @@ export default {
       const res = await api.userDel({
         userIds: checkedUserIds.value // 批量删除
       })
-      if (res.nModified > 0) {
+      if (res) {
         _this.$message.success('删除成功')
         getUserList()
       } else {
@@ -283,6 +295,7 @@ export default {
     }
     // 用戶新增
     const handleCreate = () => {
+      action.value = 'add'
       showModal.value = true
     }
     // 部门列表查询
@@ -298,11 +311,31 @@ export default {
     // 用户弹窗关闭
     const handleClose = () => {
       showModal.value = false
-      handleReset('dialogFrom')
+      handleReset('dialogForm')
     }
     // 用户提交
     const handleSubmit = () => {
+      ctx.$refs.dialogForm.validate(async (valid) => {
+        if (valid) {
+          let params = toRaw(userForm)
+          params.userEmail += '@qiyuya.com'
+          params.action = action.value
+          let res = await api.userSubmit(params)
+          showModal.value = false
+          _this.$message.success('用户创建成功')
+          handleReset('dialogForm')
+          getUserList()
 
+        }
+      })
+    }
+    // 用户编辑
+    const handleEdit = (row) => {
+      action.value = 'edit'
+      showModal.value = true
+      ctx.$nextTick(() => {
+        Object.assign(userForm, row)
+      })
     }
     return {
       user,
@@ -315,6 +348,7 @@ export default {
       rules,
       roleList,
       deptList,
+      action,
       getUserList,
       handleQuery,
       handleReset,
@@ -327,6 +361,7 @@ export default {
       getRoleList,
       handleClose,
       handleSubmit,
+      handleEdit
     }
   }
 }
