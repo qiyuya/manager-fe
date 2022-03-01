@@ -278,8 +278,8 @@ export default {
       const res = await api.userDel({
         userIds: checkedUserIds.value // 批量删除
       })
-      if (res) {
-        _this.$message.success('删除成功')
+      if (res.matchedCount) {
+        _this.$message.success(`共删除成功${res.matchedCount}条`)
         getUserList()
       } else {
         _this.$message.error('修改失败')
