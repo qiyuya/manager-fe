@@ -236,7 +236,7 @@ export default {
     onMounted(() => {
       getUserList()
       getDeptList()
-      getRoleList()
+      getRoleAllList()
     })
     // 获取用户列表
     const getUserList = async () => {
@@ -304,8 +304,8 @@ export default {
       deptList.value = list
     }
     // 角色列表查询
-    const getRoleList = async () => {
-      let list = await api.getRoleList()
+    const getRoleAllList = async () => {
+      let list = await api.getRoleAllList()
       roleList.value = list
     }
     // 用户弹窗关闭
@@ -358,7 +358,7 @@ export default {
       handleSelectionChange,
       handleCreate,
       getDeptList,
-      getRoleList,
+      getRoleAllList,
       handleClose,
       handleSubmit,
       handleEdit

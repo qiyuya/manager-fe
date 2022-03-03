@@ -49,12 +49,21 @@ export default {
     })
   },
     // 角色列表
-    getRoleList() {
+    getRoleAllList() {
     return request({
       url: '/roles/allList',
       method:'get',
       data: {},
-      mock:true
+      mock:false
+    })
+  },
+    // 角色列表
+    getRoleList(params) {
+    return request({
+      url: '/roles/list',
+      method:'get',
+      data: params,
+      mock:false
     })
   },
   // 部门列表
@@ -84,4 +93,22 @@ export default {
       mock: false
     })
   },
+   // 角色操作
+  roleOperate(params) {
+     return request({
+      url: '/roles/operate',
+      method: 'post',
+      data: params,
+      mock: false
+    })
+  },
+  // 更新权限
+  updatePermission(params) {
+      return request({
+      url: '/roles/update/permission',
+      method: 'post',
+      data: params,
+      mock: false
+    })
+  }
 }

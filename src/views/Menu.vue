@@ -88,7 +88,6 @@
   </div>
 </template>
 <script>
-import utils from '../utils/utils'
 export default {
   name: 'menu',
   data() {
@@ -174,11 +173,11 @@ export default {
       } catch (error) {
         throw new Error(error)
       }
-
     },
     // 重置表单
     handleReset(form) {
       this.$refs[form].resetFields()
+      this.getMenuList()
     },
     // 新增菜单
     handleAdd(type, row) {
@@ -210,7 +209,11 @@ export default {
           let params = { ...menuForm, action };
           let res = await this.$api.menuSubmit(params);
           this.showModal = false;
-          this.$message.success("操作成功");
+          if (action == "add") {
+            this.$message.success("创建成功");
+          } else if (action == "edit") {
+            this.$message.success("编辑成功");
+          }
           this.handleReset("dialogForm");
           this.getMenuList();
         }
