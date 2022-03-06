@@ -11,11 +11,15 @@ const NETWORK_ERROR = '网络请求异常,请稍后重试'
 // 创建axios实例对象,添加全局配置
 const service = axios.create({
   baseURL: config.baseApi,
-  timeout:8000
+  timeout: 8000
 })
 
 // 请求拦截
 service.interceptors.request.use((req) => {
+  // 如果请求是/users/login,就直接放行
+  if (req.url === '/users/login') {
+    return req
+  }
   // T0-D0
   const headers = req.headers
   const { token } = storage.getItem('userInfo')

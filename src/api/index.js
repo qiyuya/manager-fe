@@ -30,6 +30,15 @@ export default {
       mock:false
     })
   },
+  // 获取用户对应的权限菜单
+  getPermissionList() {
+    return request({
+      url: '/users/getPermissionList',
+      method:'get',
+      data: {},
+      mock:false
+    })
+  },
   // 用户列表
    getUserList(params) {
     return request({
