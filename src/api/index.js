@@ -137,5 +137,24 @@ export default {
       data: params,
       mock: false
     })
-  }
+  },
+  // 申请列表
+  getApplyList(params) {
+      return request({
+      url: '/leave/list',
+      method: 'get',
+      data: params,
+      mock: true
+    })
+  },
+  // 申请提交
+  leaveOperate(params) {
+      return request({
+      url: '/leave/operate',
+      method: 'post',
+      data: params,
+      mock: true
+    })
+  },
+
 }
