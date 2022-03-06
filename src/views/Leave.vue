@@ -20,7 +20,7 @@
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button type="primary" @click="handleApply">申请休假</el-button>
+        <el-button type="primary" @click="handleApply" v-has="'leave-create'">申请休假</el-button>
       </div>
       <el-table :data="applyList">
         <el-table-column
@@ -33,12 +33,13 @@
         ></el-table-column>
         <el-table-column label="操作" width="150">
           <template #default="scope">
-            <el-button size="mini" @click="handleDetail(scope.row)">查看</el-button>
+            <el-button size="mini" @click="handleDetail(scope.row)" v-has="'leave-query'">查看</el-button>
             <el-button
               type="danger"
               size="mini"
               @click="handleDelete(scope.row._id)"
               v-if="[1, 2].includes(scope.row.applyState)"
+              v-has="'leave-delete'"
             >作废</el-button>
           </template>
         </el-table-column>
