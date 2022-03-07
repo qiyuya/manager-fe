@@ -18,7 +18,7 @@ export default {
       url: '/leave/count',
       method:'get',
       data: {},
-      mock:true
+      mock:false
     })
   },
   // 菜单列表
@@ -144,7 +144,7 @@ export default {
       url: '/leave/list',
       method: 'get',
       data: params,
-      mock: true
+      mock: false
     })
   },
   // 申请提交
@@ -153,7 +153,16 @@ export default {
       url: '/leave/operate',
       method: 'post',
       data: params,
-      mock: true
+      mock: false
+    })
+  },
+  // 审核
+  leaveApprove(params) {
+      return request({
+      url: '/leave/approve',
+      method: 'post',
+      data: params,
+      mock: false
     })
   },
 
