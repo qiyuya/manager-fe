@@ -9,7 +9,7 @@ export default {
       url: '/users/login',
       method:'post',
       data: params,
-      mock:false
+      mock:true
     })
   },
   // 通知数量
@@ -18,7 +18,7 @@ export default {
       url: '/leave/count',
       method:'get',
       data: {},
-      mock:false
+      mock:true
     })
   },
   // 菜单列表
@@ -27,7 +27,7 @@ export default {
       url: '/menu/list',
       method:'get',
       data: params,
-      mock:false
+      mock:true
     })
   },
   // 获取用户对应的权限菜单
@@ -36,7 +36,7 @@ export default {
       url: '/users/getPermissionList',
       method:'get',
       data: {},
-      mock:false
+      mock:true
     })
   },
   // 用户列表
@@ -45,7 +45,7 @@ export default {
       url: '/users/list',
       method:'get',
       data: params,
-      mock:false
+      mock:true
     })
   },
    // 所有用户列表
@@ -54,7 +54,7 @@ export default {
       url: '/users/all/list',
       method:'get',
       data: {},
-      mock:false
+      mock:true
   })
   },
    // 用户删除
@@ -63,7 +63,7 @@ export default {
       url: '/users/delete',
       method:'post',
       data: params,
-      mock:false
+      mock:true
     })
   },
     // 角色列表
@@ -72,7 +72,7 @@ export default {
       url: '/roles/allList',
       method:'get',
       data: {},
-      mock:false
+      mock:true
     })
   },
     // 角色列表
@@ -81,7 +81,7 @@ export default {
       url: '/roles/list',
       method:'get',
       data: params,
-      mock:false
+      mock:true
     })
   },
   // 部门列表
@@ -90,7 +90,7 @@ export default {
       url: '/dept/list',
       method: 'get',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 部门创建/编辑/删除
@@ -99,7 +99,7 @@ export default {
       url: '/dept/operate',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 用户创建/编辑
@@ -108,7 +108,7 @@ export default {
       url: '/users/operate',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 菜单操作
@@ -117,7 +117,7 @@ export default {
       url: '/menu/operate',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
    // 角色操作
@@ -126,7 +126,7 @@ export default {
       url: '/roles/operate',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 更新权限
@@ -135,7 +135,7 @@ export default {
       url: '/roles/update/permission',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 申请列表
@@ -144,7 +144,7 @@ export default {
       url: '/leave/list',
       method: 'get',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 申请提交
@@ -153,7 +153,7 @@ export default {
       url: '/leave/operate',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
   // 审核
@@ -162,7 +162,7 @@ export default {
       url: '/leave/approve',
       method: 'post',
       data: params,
-      mock: false
+      mock: true
     })
   },
 
