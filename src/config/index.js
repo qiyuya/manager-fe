@@ -11,7 +11,7 @@ const EnvConfig = {
     mockApi:'https://fastmock.site/mock/17f6d4eef63739ffe7bad03b6ecfcd6b/api'
   },
   prod: {
-    baseApi: '//futurefe.com/api',
+    baseApi: 'https://service-rjx64o84-1310117805.gz.apigw.tencentcs.com/release/',
     mockApi:''
   }
 }

@@ -1,12 +1,16 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-const path = require('path')
+import path from 'path'
+import url from 'url'
+const filename = url.fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+console.log(import.meta)
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname,'./src')
+      '@': path.resolve(dirname,'./src')
     }
   },
   server: {

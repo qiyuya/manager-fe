@@ -1,6 +1,7 @@
 {
   "name": "manager-fe",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
     "build": "vite build",
@@ -9,13 +10,13 @@
   "dependencies": {
     "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.32",
-    "vite": "^2.0.1",
-    "vue": "^3.0.5",
+    "vite": "^2.8.6",
+    "vue": "^3.2.31",
     "vue-router": "^4.0.4",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.1.4",
+    "@vitejs/plugin-vue": "^2.2.4",
     "@vue/compiler-sfc": "^3.0.5",
     "sass": "^1.32.8"
   }

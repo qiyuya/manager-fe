@@ -63,7 +63,7 @@ async function loadAsyncRoutes() {
 }
 
 
-await loadAsyncRoutes()
+ loadAsyncRoutes()
 // 判断当前地址是否可以访问
  function checkPermission(path) {
   let hasPermission = router.getRoutes().filter(route => route.path == path).length
