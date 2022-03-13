@@ -11,19 +11,3 @@
 
  https://www.fastmock.site/mock/17f6d4eef63739ffe7bad03b6ecfcd6b/api 
 
-#### 登陆用户
-
-密码统一都是admin
-
-管理员账号: admin 密码: admin
-
-普通用户账号: tom loulou renshi caiwu cxy1 ...
-
-#### 部门权限
-
-可控制页面交互权限
-
-#### 审批权限
-
-第一审批人部门负责人 依次是人事部门、财务部门
-
